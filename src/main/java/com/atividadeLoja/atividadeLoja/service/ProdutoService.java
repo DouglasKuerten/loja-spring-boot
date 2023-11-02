@@ -6,6 +6,8 @@ import com.atividadeLoja.atividadeLoja.model.Status;
 import com.atividadeLoja.atividadeLoja.repository.ProdutoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,6 +33,9 @@ public class ProdutoService {
     }
     public List<Produto> buscarTodos(String filter){
         return produtoRepository.findAll(filter, Produto.class);
+    }
+    public Page<Produto> buscarTodos(String filter, Pageable pageable){
+        return produtoRepository.findAll(filter, Produto.class, pageable);
     }
     public Produto buscarPorId(Long id){
         return produtoRepository.findById(id).orElse(null);
